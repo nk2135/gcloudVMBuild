@@ -54,7 +54,7 @@ pipeline {
     post {
         always {
             // Clean up. IMPORTANT: Make sure you handle state files securely and don't delete unless intended!
-            sh 'rm -f gcp_key.json'
+            sh 'rm -f smooth-league-275317-eafc1a750e38.json'
         }
     }
 }
