@@ -1,16 +1,16 @@
 resource "google_compute_instance" "default" {
-  name         = "testvm1238"
-  machine_type = "f1-micro"
-  zone         = "us-central1-a"
+  name         = ""
+  machine_type = ""
+  zone         = ""
 
   boot_disk {
     initialize_params {
-      image = "windows-server-2012-r2-dc-v20230621"
+      image = ""
     }
   }
 
   network_interface {
-    network = "default"
+    network = ""
 
     access_config {
       // Ephemeral IP
@@ -19,9 +19,9 @@ resource "google_compute_instance" "default" {
 }
 
 resource "google_storage_bucket" "bucket" {
-  name     = "gcp_bucket_258964"
-  location = "us"
-  project  = "smooth-league-275317"
+  name     = ""
+  location = ""
+  project  = ""
   force_destroy = true
 
   // Uncomment below line to make bucket data private
@@ -34,28 +34,28 @@ resource "google_storage_bucket" "bucket" {
 }
 
 resource "google_compute_disk" "pbm02d1disk001" {
-	name	= 	"pbm01d1disk001"
-	type   	= 	"pd-ssd"
-	size	= 	100
-	zone	= 	"us-central1-a"
-	physical_block_size_bytes = 4096
+	name	= 	""
+	type   	= 	""
+	size	= 	
+	zone	= 	""
+	physical_block_size_bytes = 
     
 }
 
 //Create New Disk and Attach to testvm1238 VM
 resource "google_compute_instance" "testvm12389" {
-	name		=	"testvm12389"
-	machine_type	=	"e2-micro"
-	zone		=	"us-central1-b"
+	name		=	""
+	machine_type	=	""
+	zone		=	""
 	
 	boot_disk {
 		initialize_params {
-			image 	=	"windows-server-2012-r2-dc-v20230621"
+			image 	=	""
 		}
 	}
 
 	network_interface {
-		network = "default"
+		network = ""
 		
 	access_config {
 		//Ephemeral IP
