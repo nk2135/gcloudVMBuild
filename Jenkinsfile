@@ -35,7 +35,9 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                bat 'terraform plan -out=tfplan'
+                bat 'terraform plan -out=tfplan -no-color'
+		
+
             }
         }
 
