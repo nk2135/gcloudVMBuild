@@ -51,7 +51,7 @@ pipeline {
         stage('Terraform Apply') {
             steps {
                 script {
-                    bat 'terraform apply -auto-approve tfplan'
+                    bat 'terraform apply -auto-approve tfplan' -no-color
                 }
             }
         }
