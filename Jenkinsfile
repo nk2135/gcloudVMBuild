@@ -15,11 +15,7 @@ pipeline {
         stage('Setup GCP Auth') {
             steps {
                 script {
-                    // Save the GCP service account key from Jenkins credentials to a file
                     bat 'echo %GOOGLE_CREDENTIALS% > smooth-league-275317-eafc1a750e38.json'
-                    // On Windows, setting an environment variable this way may not work. 
-                    // You might need to set this environment variable outside of the Jenkins pipeline, 
-                    // or use a different method to authenticate with GCP.
                     bat 'set GOOGLE_APPLICATION_CREDENTIALS=%WORKSPACE%\\smooth-league-275317-eafc1a750e38.json'
                 }
             }
@@ -43,10 +39,16 @@ pipeline {
             }
         }
 
+        // Add this new stage for manual review
+        stage('Review Plan') {
+            steps {
+                input(message: 'Review the Terraform plan. Proceed to apply?', ok: 'Proceed')
+            }
+        }
+
         stage('Terraform Apply') {
             steps {
                 script {
-                    // Auto-approve for demo purposes.
                     bat 'terraform apply -auto-approve tfplan'
                 }
             }
@@ -55,7 +57,6 @@ pipeline {
 
     post {
         always {
-            // Clean up. IMPORTANT: Make sure you handle state files securely and don't delete unless intended!
             bat 'del smooth-league-275317-eafc1a750e38.json'
         }
     }
