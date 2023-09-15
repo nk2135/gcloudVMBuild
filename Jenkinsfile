@@ -23,13 +23,13 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                bat 'terraform init'
+                bat 'terraform init -no-color'
             }
         }
 
         stage('Terraform Validate') {
             steps {
-                bat 'terraform validate'
+                bat 'terraform validate -no-color'
             }
         }
 
