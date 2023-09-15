@@ -13,10 +13,11 @@ resource "google_compute_instance" "default" {
         my_label = "value"
       }
     }
-    network_interface {
+   
+}
+ network_interface {
     subnetwork = google_compute_subnetwork.vpc_subnet.self_link
     }
-}
 }
 
 
