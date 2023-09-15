@@ -16,32 +16,20 @@ pipeline {
             steps {
                 script {
                     bat 'echo %GOOGLE_CREDENTIALS% > smooth-league-275317-eafc1a750e38.json'
-                    bat 'set GOOGLE_APPLICATION_CREDENTIALS=%WORKSPACE%\\smooth-league-275317-eafc1a750e38.json'
                 }
             }
         }
 
-        stage('Terraform Init') {
+        stage('Terraform Actions') {
             steps {
-                bat 'terraform init -no-color'
+                withEnv(["GOOGLE_APPLICATION_CREDENTIALS=${WORKSPACE}\\smooth-league-275317-eafc1a750e38.json"]) {
+                    bat 'terraform init -no-color'
+                    bat 'terraform validate -no-color'
+                    bat 'terraform plan -out=tfplan -no-color'
+                }
             }
         }
 
-        stage('Terraform Validate') {
-            steps {
-                bat 'terraform validate -no-color'
-            }
-        }
-
-        stage('Terraform Plan') {
-            steps {
-                bat 'terraform plan -out=tfplan -no-color'
-		
-
-            }
-        }
-
-        // Add this new stage for manual review
         stage('Review Plan') {
             steps {
                 input(message: 'Review the Terraform plan. Proceed to apply?', ok: 'Proceed')
@@ -50,8 +38,8 @@ pipeline {
 
         stage('Terraform Apply') {
             steps {
-                script {
-                    bat 'terraform apply -auto-approve -tfplan'
+                withEnv(["GOOGLE_APPLICATION_CREDENTIALS=${WORKSPACE}\\smooth-league-275317-eafc1a750e38.json"]) {
+                    bat 'terraform apply -auto-approve tfplan'
                 }
             }
         }
