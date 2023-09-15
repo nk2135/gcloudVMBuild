@@ -16,7 +16,7 @@ resource "google_compute_instance" "default" {
    
 }
  network_interface {
-    subnetwork = google_compute_subnetwork.vpc_subnet.self_link
+    network = "default"
     }
 }
 
