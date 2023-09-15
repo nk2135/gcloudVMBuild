@@ -19,6 +19,6 @@ variable "zone" {
 variable "boot_disk"{
 description = "Boot disk for VM"
 type        = number
-default     = 60
+default     = 50
 }
 
